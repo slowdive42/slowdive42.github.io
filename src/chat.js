@@ -19,6 +19,13 @@ function resizeTextarea() {
 
 userInput.addEventListener('input', resizeTextarea);
 
+if (!res.ok) {
+  const errData = await res.json();
+  placeholder.textContent = `❌ 错误 ${res.status}: ${errData.error?.message || '请求失败'}`;
+  return;
+}
+
+
 // ---------- Chat ----------
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
