@@ -1,10 +1,9 @@
-# .github/workflows/deploy.yml
 name: Deploy Chatbot to GitHub Pages
 
 on:
   push:
-    branches: ["main"]          # 如果你的主分支不是 main，请改成 master
-  workflow_dispatch:            # 允许手动触发
+    branches: ["main"]       # 如果主分支叫 master 就改成 master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,12 +18,21 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # 👈 必须声明 environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}   # 让 Pages URL 显示在界面上
+
     steps:
+      # 0) 配置 Pages（生成 _site 等元数据）
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       # 1) 拉代码
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2) 复制 src → dist，并写入真正的 config.js
+      # 2) Build —— 复制 src 并写入密钥
       - name: Build static site
         run: |
           rm -rf dist
@@ -34,11 +42,11 @@ jobs:
 
       # 3) 上传产物
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
-      # 4) 发布到 GitHub Pages
+      # 4) 真正发布
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
