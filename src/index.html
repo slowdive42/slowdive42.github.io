@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nathan AI Chatbot</title>
+
+  <!-- 外部样式 -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 头像：放在 /src/assets/avatar.png 或用外链 -->
+  <link rel="icon" href="assets/avatar.png" />
+</head>
+<body>
+  <main class="chat-container">
+    <header class="chat-header">
+      <img src="assets/avatar.png" alt="Bot Avatar" class="avatar" />
+      <h1>Nathan Bot</h1>
+    </header>
+
+    <!-- 消息区域 -->
+    <section id="chatLog" class="chat-log">
+      <!-- 消息会通过 JS 追加到这里 -->
+    </section>
+
+    <!-- 输入区域 -->
+    <form id="chatForm" class="chat-form">
+      <textarea
+        id="userInput"
+        placeholder="向 Nathan Bot 提问吧…"
+        rows="1"
+        required
+      ></textarea>
+      <button type="submit">发送</button>
+    </form>
+  </main>
+
+  <!-- 核心逻辑 -->
+  <script src="chat.js" type="module"></script>
+</body>
+</html>
