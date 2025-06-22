@@ -34,6 +34,7 @@ jobs:
           mkdir -p dist
           cp -r src/* dist/
           echo "window.OPENAI_API_KEY='${{ secrets.OPENAI_API_KEY }}';" > dist/config.js
+          echo "=== dist ==="; ls -R dist   
 
       # ⬇️ 关键：换成 v3（内部已是 artifact v4）
       - name: Upload Pages artifact
