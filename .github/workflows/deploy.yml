@@ -1,9 +1,8 @@
-# .github/workflows/deploy.yml
 name: Deploy Chatbot to GitHub Pages
 
 on:
   push:
-    branches: ["main"]          # 如果主分支叫 master 就改成 master
+    branches: [main]          # 如果主分支叫 master 就改成 master
   workflow_dispatch:
 
 permissions:
@@ -12,13 +11,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -37,9 +35,9 @@ jobs:
           cp -r src/* dist/
           echo "window.OPENAI_API_KEY='${{ secrets.OPENAI_API_KEY }}';" > dist/config.js
 
-      # ▼ 这里改成 v1
+      # ⬇️ 关键：换成 v3（内部已是 artifact v4）
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
