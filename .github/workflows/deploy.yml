@@ -1,0 +1,44 @@
+# .github/workflows/deploy.yml
+name: Deploy Chatbot to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]          # 如果你的主分支不是 main，请改成 master
+  workflow_dispatch:            # 允许手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) 拉代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2) 复制 src → dist，并写入真正的 config.js
+      - name: Build static site
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp -r src/* dist/
+          echo "window.OPENAI_API_KEY='${{ secrets.OPENAI_API_KEY }}';" > dist/config.js
+
+      # 3) 上传产物
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      # 4) 发布到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
