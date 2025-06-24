@@ -48,7 +48,7 @@ chatForm.addEventListener('submit', async (e) => {
         'Authorization': `Bearer ${window.OPENAI_API_KEY}`   // 来自 config.js
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',        // 想省钱就换 gpt-3.5-turbo
+        model: 'gpt-3.5-turbo',        // 想省钱就换 gpt-3.5-turbo
         temperature: 0.7,
         max_tokens: 512,
         messages: [
