@@ -1,5 +1,6 @@
 name: Deploy Chatbot to GitHub Pages
-
+# 这个工作流会在每次推送到 main 分支时触发
+# 你可以根据需要修改分支名称
 on:
   push:
     branches: [main]          # 如果主分支叫 master 就改成 master
