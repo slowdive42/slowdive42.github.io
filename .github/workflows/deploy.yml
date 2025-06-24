@@ -33,7 +33,7 @@ jobs:
         run: |
           rm -rf dist
           mkdir -p dist
-          cp -r src/* dist/
+          cp -r * dist/
           echo "window.OPENROUTER_API_KEY='${{ secrets.OPENROUTER_API_KEY }}';" > dist/config.js
           echo "=== dist ==="; ls -R dist 
           echo "== Injected Key =="
