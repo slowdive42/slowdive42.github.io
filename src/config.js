@@ -1,0 +1,1 @@
+window.OPENROUTER_API_KEY = 'dev-placeholder';  // 会在 GitHub Actions 注入真实值
