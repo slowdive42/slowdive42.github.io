@@ -35,7 +35,9 @@ jobs:
           mkdir -p dist
           cp -r src/* dist/
           echo "window.OPENROUTER_API_KEY='${{ secrets.OPENROUTER_API_KEY }}';" > dist/config.js
-          echo "=== dist ==="; ls -R dist   
+          echo "=== dist ==="; ls -R dist 
+          echo "== Injected Key =="
+          echo ${{ secrets.OPENROUTER_API_KEY }}  
 
       # ⬇️ 关键：换成 v3（内部已是 artifact v4）
       - name: Upload Pages artifact
