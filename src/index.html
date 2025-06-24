@@ -3,40 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nathan AI Chatbot</title>
-
-  <!-- 外部样式 -->
+  <title>Nathan | Quant & ML Engineer</title>
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- 头像：放在 /src/assets/avatar.png 或用外链 -->
-  <link rel="icon" href="assets/avatar.png" />
+  <script defer src="config.js"></script>
+  <script defer src="chat.js" type="module"></script>
+  <script defer src="charts.js"></script>
 </head>
 <body>
-  <main class="chat-container">
-    <header class="chat-header">
-      <img src="assets/avatar.png" alt="Bot Avatar" class="avatar" />
-      <h1>Nathan Bot</h1>
-    </header>
+  <header class="site-header">
+    <div class="logo">Nathan</div>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
 
-    <!-- 消息区域 -->
-    <section id="chatLog" class="chat-log">
-      <!-- 消息会通过 JS 追加到这里 -->
-    </section>
-
-    <!-- 输入区域 -->
-    <form id="chatForm" class="chat-form">
-      <textarea
-        id="userInput"
-        placeholder="向 Nathan Bot 提问吧…"
-        rows="1"
-        required
-      ></textarea>
-      <button type="submit">发送</button>
-    </form>
+  <main class="hero-section">
+    <h1>Hi, I’m Nathan</h1>
+    <h2>Quant & ML Engineer</h2>
+    <p>I build quantitative trading strategies and develop machine learning models.</p>
+    <div class="tags">
+      <span>Quantitative</span><span>Machine Learning</span><span>Python</span><span>Trading</span>
+    </div>
+    <button id="chatToggle">Chat with Me</button>
   </main>
 
-  <!-- 核心逻辑 -->
-  <script src="config.js"></script>
-  <script src="chat.js" type="module"></script>
+  <section class="charts-section" id="projects">
+    <h3>Strategy Performance</h3>
+    <canvas id="strategyChart"></canvas>
+    <div class="stats">
+      <div class="stat-box">
+        <div class="value">+34.7%</div>
+        <div class="label">All Time Return</div>
+      </div>
+      <div class="stat-box">
+        <div class="value">1.42</div>
+        <div class="label">Sharpe Ratio</div>
+      </div>
+      <div class="stat-box">
+        <div class="value">8.3%</div>
+        <div class="label">Max Drawdown</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-section" id="blog">
+    <h3>Blog</h3>
+    <div class="blog-cards">
+      <div class="card">
+        <h4>Exploring Feature Engineering in ML</h4>
+        <p>Placeholder content for blog article...</p>
+      </div>
+      <div class="card">
+        <h4>Building a Backtesting System</h4>
+        <p>Placeholder content for blog article...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <img class="avatar" src="assets/avatar.png" alt="Nathan's Avatar" />
+    <div>
+      <h3>About Me</h3>
+      <p>Quant & ML enthusiast. Passionate about systematic trading and model-driven decision making.</p>
+      <div class="socials">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="chatbot" class="chatbot hidden">
+    <div class="chat-log" id="chatLog"></div>
+    <form id="chatForm" class="chat-form">
+      <textarea id="userInput" placeholder="Ask Nathan Bot..." rows="1" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('chatToggle');
+    const chatbotBox = document.getElementById('chatbot');
+    toggleBtn.addEventListener('click', () => chatbotBox.classList.toggle('hidden'));
+  </script>
 </body>
 </html>
