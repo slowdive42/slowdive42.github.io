@@ -8,6 +8,7 @@
   <script defer src="config.js"></script>
   <script defer src="chat.js" type="module"></script>
   <script defer src="charts.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -31,7 +32,7 @@
 
   <section class="charts-section" id="projects">
     <h3>Strategy Performance</h3>
-    <canvas id="strategyChart"></canvas>
+    <div id="strategyChart" style="width: 100%; height: 400px;"></div>
     <div class="stats">
       <div class="stat-box">
         <div class="value">+34.7%</div>

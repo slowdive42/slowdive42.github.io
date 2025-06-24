@@ -1,6 +1,6 @@
 // charts.js
 
-fetch('chart_sample.csv')
+fetch('/assets/chart_sample.csv')
   .then(res => res.text())
   .then(text => {
     const rows = text.trim().split('\n').slice(1); // skip header
