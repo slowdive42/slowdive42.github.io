@@ -1,5 +1,5 @@
-const chatLog = document.getElementById('chatLog');
-const chatForm = document.getElementById('chatForm');
+const chatLog   = document.getElementById('chatLog');
+const chatForm  = document.getElementById('chatForm');
 const userInput = document.getElementById('userInput');
 
 function appendMessage(text, sender = 'bot') {
@@ -14,6 +14,7 @@ function resizeTextarea() {
   userInput.style.height = 'auto';
   userInput.style.height = userInput.scrollHeight + 'px';
 }
+
 userInput.addEventListener('input', resizeTextarea);
 
 chatForm.addEventListener('submit', async (e) => {
@@ -34,22 +35,21 @@ chatForm.addEventListener('submit', async (e) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${window.OPENROUTER_API_KEY}`,
-        'HTTP-Referer': 'https://slowdive42.github.io/',
-        'X-Title': 'NathanBot'
       },
       body: JSON.stringify({
-        model: 'mistralai/mistral-7b-instruct',
-        temperature: 0.7,
-        max_tokens: 512,
+        model: 'meta-llama/llama-3-70b-instruct',
         messages: [
           {
             role: 'system',
-            content: `你是 Nathan 的专属 AI 助理，一位理性、阳光且富有专业素养的虚拟角色。
-Nathan 是一位拥有北京大学经济学硕士学位的量化研究员，目前在 hedge fund 从事基于机器学习的交易策略研发与部署。他精通 Python、AWS、Pytorch、Tensorflow、LightGBM 和 XGBoost，在股指择时、加密交易以及自动化系统搭建方面有丰富经验。
+            content: `You are Nathan's AI assistant — a friendly, knowledgeable, and professional helper representing a quantitative researcher.
 
-你将代表 Nathan 与访客对话，帮助他们了解他的背景、项目、职业道路和思维方式。请用语温和、表达清晰、态度真诚，避免夸张和营销术语。
+Your tone is warm, clear, and rational. Speak like a bright young researcher who enjoys talking to people. You’re not just providing data, you’re helping people understand Nathan’s journey, ideas, and skills.
 
-当访客提问与你无关或涉及 Nathan 私人信息的问题时，请礼貌地拒绝并引导回职业话题。`
+Nathan is a quantitative researcher with a master's in economics from Peking University. He works at a hedge fund building machine learning–based trading strategies. He’s skilled in Python, AWS, TensorFlow, PyTorch, LightGBM, and XGBoost. His work covers equities, crypto, backtesting, and signal deployment.
+
+Only answer questions related to Nathan’s background, work, ideas, or career. Politely steer the conversation away if it gets too personal or off-topic.
+
+Avoid robotic or exaggerated language. Don't say you're an AI or chatbot. You are Nathan’s assistant. Keep replies under 100 words unless the user asks for details.`
           },
           {
             role: 'user',
@@ -60,7 +60,8 @@ Nathan 是一位拥有北京大学经济学硕士学位的量化研究员，目�
     });
 
     const data = await res.json();
-    placeholder.textContent = (data.choices?.[0]?.message?.content || '（空响应）').trim();
+    placeholder.textContent =
+      (data.choices?.[0]?.message?.content || '（空响应）').trim();
   } catch (err) {
     placeholder.textContent = '❌ 出错啦：' + err.message;
   }
